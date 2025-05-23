@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toolblox - QA Tools</title>
+    <title>Toolblox QA - Offline</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Toolblox - QA</h1>
-
+    <h1>Toolblox QA - Offline</h1>
     <div class="tool">
         <h2>Conversor de Texto</h2>
         <textarea id="textInput" placeholder="Digite seu texto aqui..."></textarea>
@@ -18,14 +17,12 @@
         <button onclick="removeSpaces()">Remover Espaços e Pontuação</button>
         <textarea id="textOutput" readonly></textarea>
     </div>
-
     <div class="tool">
         <h2>Gerador de CPF e CNPJ</h2>
         <button onclick="generateCPF()">Gerar CPF</button>
         <button onclick="generateCNPJ()">Gerar CNPJ</button>
         <input id="cpfCnpjOutput" readonly>
     </div>
-
     <div class="tool">
         <h2>Testador de Regex</h2>
         <textarea id="regexInput" placeholder="Digite a regex"></textarea>
@@ -33,7 +30,6 @@
         <button onclick="testRegex()">Testar Regex</button>
         <textarea id="regexOutput" readonly></textarea>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
