@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Dados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gerador de Dados  </h1>
+
+    <div class="container">
+        <label for="tipo">Escolha o tipo de dado:</label>
+        <select id="tipo">
+            <option value="cpf">CPF</option>
+            <option value="cnpj">CNPJ</option>
+            <option value="cnh">CNH</option>
+            <option value="renavam">RENAVAM</option>
+            <option value="rg">RG</option>
+            <option value="pis_pasep">PIS/PASEP</option>
+        </select>
+        <br>
+        <button onclick="gerar()">Gerar</button>
+
+        <h3>Resultado:</h3>
+        <pre id="resultado">Clique em "Gerar".</pre>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
