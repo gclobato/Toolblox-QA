@@ -34,6 +34,14 @@
         <button onclick="testRegex()">Testar Regex</button>
         <textarea id="regexOutput" readonly></textarea>
     </div>
+    <div class="tool">
+        <h2>Analisador de Logs</h2>
+        <input type="file" id="logFile">
+        <input type="text" id="logKeyword" placeholder="Palavra-chave ou regex">
+        <button onclick="analyzeLog()">Analisar Log</button>
+        <textarea id="logOutput" rows="10" readonly></textarea>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
