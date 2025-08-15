@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comparação de Logs - Comparação Interna em Cada Tabela</title>
+  <style>
+    :root {
+      --color-match-bg: #4caf50;
+      --color-match-border: #388e3c;
+      --color-no-match-bg: #f44336;
+      --color-no-match-border: #d32f2f;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #fafafa;
+      color: #333;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      width: 100%;
+      max-width: 100%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    tbody tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    input {
+      width: 100px;
+      padding: 6px 8px;
+      font-size: 14px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      text-align: center;
+      box-sizing: border-box;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    input:focus {
+      border-color: #555;
+      outline: none;
+      box-shadow: 0 0 5px rgba(85,85,85,0.5);
+    }
+
+    /* Classes para marcação */
+    .match {
+      background-color: var(--color-match-bg);
+      border-color: var(--color-match-border);
+      color: #fff;
+    }
+
+    .no-match {
+      background-color: var(--color-no-match-bg);
+      border-color: var(--color-no-match-border);
+      color: #fff;
+    }
+
+    /* Coluna do subtítulo em negrito e sem cor */
+    td:first-child {
+      font-weight: bold;
+      background-color: transparent !important;
+      border-color: #ccc !important;
+      color: initial !important;
+    }
+
+    /* Responsividade simplificada */
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead tr {
+        display: none;
+      }
+      tr {
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 12px;
+      }
+      td {
+        border: none !important;
+        padding: 6px 0;
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+      }
+      td::before {
+        position: absolute;
+        top: 6px;
+        left: 10px;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        content: attr(data-label);
+      }
+      input {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>EIS Partição 1</h1>
+  <table id="tableEIS" aria-label="Tabela EIS Partição 1">
+    <thead>
+      <tr>
+        <th>Subtítulo</th>
+        <th>ptaCod</th>
+        <th>logNsuPta</th>
+        <th>logNsuHst</th>
+        <th>oprMat</th>
+        <th>supMat</th>
+        <th>terNum</th>
+        <th>ptaCodDsn</th>
+        <th>ctrCod</th>
+        <th>logCrpCod</th>
+        <th>logDatMov</th>
+        <th>logHorMov</th>
+        <th>logNsuAss</th>
+        <th>logNsuEsr</th>
+        <th>logTrnSta</th>
+        <th>logNumPrt</th>
+        <th>ctaNum</th>
+        <th>ctaTip</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h1>MAC_LOG</h1>
+  <table id="tableMAC" aria-label="Tabela MAC_LOG">
+    <thead>
+      <tr>
+        <th>Subtítulo</th>
+        <th>LOGDATREF</th>
+        <th>LOGISTSUPAGE</th>
+        <th>LOGNUMNSU</th>
+        <th>LOGCODTRN</th>
+        <th>LOGDAT</th>
+        <th>LOGHOR</th>
+        <th>LOGFNRMAT</th>
+        <th>LOGMATSUP</th>
+        <th>LOGNSUESR</th>
+        <th>LOGNSUTRNANT</th>
+        <th>LOGNUMCTA</th>
+        <th>LOGNUMSUPAGE</th>
+        <th>LOGNUMTER</th>
+        <th>LOGPRT</th>
+        <th>LOGNUMAGE</th>
+        <th>LOGSTATRN</th>
+        <th>LOGTIPCTA</th>
+        <th>LOGTIPPRT</th>
+        <th>LOGVAL</th>
+        <th>LOGRECNUM</th>
+        <th>LOGDATHORENVIOCORPORATIVO</th>
+        <th>LOGSTATUSENVIOCORPORATIVO</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    // Dados para preencher as tabelas
+    const dataEIS = [
+      ["ABX32", "123", "67890", "ABC", "XYZ", "001", "DSN1", "CTR001", "CRP001", "2025-05-31", "11:00", "ASS001", "ESR001", "STA001", "PRT001", "CTA001", "TIP001"],
+      ["ABX64", "123", "67890", "ABC", "XYZ", "001", "DSN1", "CTR001", "CRP001", "2025-05-31", "11:00", "ASS001", "ESR001", "STA001", "PRT002", "CTA001", "TIP001"]
+    ];
+
+    const dataMAC = [
+      ["ABX32", "2025-05-31", "1", "67890", "ABC", "2025-05-31", "11:00", "XYZ", "001", "ESR001", "NSUANT1", "CTA001", "SUP001", "TER001", "PRT001", "AGE001", "STA001", "TIP001", "TIPPRT1", "VAL001", "REC001", "2025-05-31T14:00", "STATUS001"],
+      ["ABX64", "2025-05-31", "1", "67890", "ABC", "2025-05-31", "11:00", "XYZ", "001", "ESR001", "NSUANT1", "CTA001", "SUP001", "TER001", "PRT002", "AGE001", "STA001", "TIP001", "TIPPRT1", "VAL001", "REC001", "2025-05-31T14:00", "STATUS001"]
+    ];
+
+    // Cria células com inputs editáveis (exceto coluna 0)
+    function createCell(content, isEditable, tableId, rowKey, cellIndex, label) {
+      const td = document.createElement('td');
+      td.setAttribute('data-label', label);
+
+      if (!isEditable) {
+        td.textContent = content;
+        if (cellIndex === 0) td.style.fontWeight = 'bold';
+        return td;
+      }
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = content;
+      input.dataset.table = tableId;
+      input.dataset.row = rowKey;
+      input.dataset.index = cellIndex;
+      input.setAttribute('aria-label', `${label} para ${rowKey}`);
+      input.addEventListener('input', validateInputs);
+      td.appendChild(input);
+      return td;
+    }
+
+    // Popula a tabela com base nos dados e cabeçalhos
+    function populateTable(tableId, data) {
+      const table = document.getElementById(tableId);
+      const tbody = table.querySelector('tbody');
+      const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent);
+      tbody.innerHTML = '';
+
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        row.forEach((cell, idx) => {
+          const isEditable = idx !== 0;
+          tr.appendChild(createCell(cell, isEditable, tableId, row[0], idx, headers[idx]));
+        });
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Normaliza valores para comparação
+    function normalizeValue(val) {
+      return String(val ?? '').replace(/[.,]/g, '').toLowerCase().trim();
+    }
+
+    // Compara valores dentro de cada tabela, linha ABX64 vs ABX32
+    function validateInputs() {
+      ['tableEIS', 'tableMAC'].forEach(tableId => {
+        const table = document.getElementById(tableId);
+        const inputs = table.querySelectorAll('input');
+
+        // Mapear inputs por linha e coluna
+        const rowsMap = { ABX32: {}, ABX64: {} };
+        inputs.forEach(input => {
+          rowsMap[input.dataset.row][input.dataset.index] = input;
+        });
+
+        // Compara ABX64 com ABX32 célula a célula
+        Object.keys(rowsMap.ABX64).forEach(index => {
+          const inputABX64 = rowsMap.ABX64[index];
+          const inputABX32 = rowsMap.ABX32[index];
+
+          if (!inputABX64 || !inputABX32) return;
+
+          const val64 = normalizeValue(inputABX64.value);
+          const val32 = normalizeValue(inputABX32.value);
+
+          if (val64 === val32) {
+            inputABX64.classList.add('match');
+            inputABX64.classList.remove('no-match');
+          } else {
+            inputABX64.classList.add('no-match');
+            inputABX64.classList.remove('match');
+          }
+        });
+      });
+    }
+
+    // Inicializa a aplicação
+    function init() {
+      populateTable('tableEIS', dataEIS);
+      populateTable('tableMAC', dataMAC);
+      validateInputs();
+
+      // Foco inicial no primeiro input editável
+      const firstInput = document.querySelector('input');
+      if (firstInput) firstInput.focus();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+
+</body>
+</html>

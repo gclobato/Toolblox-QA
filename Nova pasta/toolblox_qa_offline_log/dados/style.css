@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.controls {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.controls label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+#quantity-input {
+  width: 60px;
+  padding: 5px;
+}
+
+#generate-btn {
+  padding: 7px 15px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#generate-btn:hover {
+  background-color: #0056b3;
+}
+
+#result {
+  white-space: pre-wrap;
+  background: #eee;
+  padding: 15px;
+  border-radius: 5px;
+  max-height: 400px;
+  overflow: auto;
+  font-family: monospace;
+}
