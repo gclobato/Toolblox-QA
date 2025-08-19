@@ -3,35 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Notícias do Brasil</title>
- <link rel="stylesheet" href="style.css">
- 
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1> Últimas Notícias do Brasil</h1>
+  <h1>Últimas Notícias do Brasil</h1>
   <div id="noticias"></div>
 
   <script>
-    const API_KEY = 'c89780d748824fc38979466d2a824f36'; // Substitua pela sua chave
-    const url = `https://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=${API_KEY}`;
+    const API_KEY = "c89780d748824fc38979466d2a824f36"; // sua chave da NewsAPI
+    const url = `https://newsapi.org/v2/top-headlines?country=br&language=pt&apiKey=${API_KEY}`;
 
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        const container = document.getElementById('noticias');
+        const container = document.getElementById("noticias");
+        container.innerHTML = "";
+
+        if (!data.articles || data.articles.length === 0) {
+          container.innerHTML = "<p>Nenhuma notícia encontrada.</p>";
+          return;
+        }
+
         data.articles.forEach(article => {
-          const div = document.createElement('div');
-          div.className = 'noticia';
+          const div = document.createElement("div");
+          div.className = "noticia";
           div.innerHTML = `
             <h2>${article.title}</h2>
-            <p>${article.description || ''}</p>
+            <p>${article.description || ""}</p>
             <a href="${article.url}" target="_blank">Leia mais</a>
           `;
           container.appendChild(div);
         });
       })
       .catch(error => {
-        console.error('Erro ao buscar notícias:', error);
-        document.getElementById('noticias').innerText = 'Não foi possível carregar as notícias.';
+        console.error("Erro ao buscar notícias:", error);
+        document.getElementById("noticias").innerText = 
+          "Não foi possível carregar as notícias.";
       });
   </script>
 </body>
