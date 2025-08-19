@@ -9,6 +9,32 @@ h1 {
     text-align: center;
 }
 
+
+/* Botões estilo QA Toolbox */
+a.btn-link {
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 8px 6px;
+    background: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.25);
+}
+a.btn-link:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 123, 255, 0.35);
+}
+a.btn-link:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+}
+
+
 .tool {
     background: #f7f6f6;
     padding: 20px;
