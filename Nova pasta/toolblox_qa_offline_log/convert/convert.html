@@ -8,14 +8,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
+ 
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.tool {
+    background: #f7f6f6;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(3, 3, 3, 0.7);
+}
         button {
-            margin: 10px 0;
-            padding: 10px 15px;
-            font-size: 16px;
+           
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 16px;
+
         }
         pre {
             background-color: #f4f4f4;
@@ -23,6 +45,22 @@
             border: 1px solid #ccc;
             overflow-x: auto;
         }
+
+        textarea, input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #665c5c2f;;
+    color: #000000; /* alterado para preto para melhor contraste */
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
     </style>
 </head>
 <body>
@@ -34,17 +72,12 @@
     <button onclick="compressFiles()">Comprimir Arquivos</button>
     <pre id="compressResult"></pre>
 
-    <h2>2. Converter DOCX para PDF</h2>
-    <input type="file" id="docxFile" accept=".docx">
-    <button onclick="convertDocxToPdf()">Converter DOCX para PDF</button>
-    <pre id="convertResult"></pre>
-
-    <h2>3. Mesclar PDFs</h2>
+    <h2>2. Mesclar PDFs</h2>
     <input type="file" id="pdfFiles" accept=".pdf" multiple>
     <button onclick="mergePdfs()">Mesclar PDFs</button>
     <pre id="mergeResult"></pre>
 
-    <h2>4. Adicionar Marca d'Água ao PDF</h2>
+    <h2>3. Adicionar Marca d'Água ao PDF</h2>
     <input type="file" id="watermarkPdfFile" accept=".pdf">
     <input type="file" id="watermarkLogoFile" accept=".png, .jpg, .jpeg">
     <button onclick="addWatermark()">Adicionar Marca d'Água ao PDF</button>
@@ -63,27 +96,6 @@
             const content = await zip.generateAsync({ type: "blob" });
             const url = URL.createObjectURL(content);
             downloadFile(url, 'compactado.zip');
-        };
-
-        // Converter DOCX para PDF
-        const convertDocxToPdf = async () => {
-            const fileInput = document.getElementById('docxFile');
-            const file = fileInput.files[0];
-
-            if (!file) {
-                alert("Por favor, selecione um arquivo DOCX.");
-                return;
-            }
-
-            const arrayBuffer = await file.arrayBuffer();
-            const { value } = await mammoth.convertToHtml({ arrayBuffer });
-            const pdfDoc = await PDFLib.PDFDocument.create();
-            const page = pdfDoc.addPage([600, 400]);
-            page.drawText(value, { x: 50, y: 350 });
-
-            const pdfBytes = await pdfDoc.save();
-            const url = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
-            downloadFile(url, 'convertido.pdf');
         };
 
         // Merge PDFs
