@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processamento de dados</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            margin: 10px 0;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ccc;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Processamento de dados </h1>
+
+    <h2>1. Comprimir Arquivos</h2>
+    <input type="file" id="compressFiles" multiple>
+    <button onclick="compressFiles()">Comprimir Arquivos</button>
+    <pre id="compressResult"></pre>
+
+    <h2>2. Converter DOCX para PDF</h2>
+    <input type="file" id="docxFile" accept=".docx">
+    <button onclick="convertDocxToPdf()">Converter DOCX para PDF</button>
+    <pre id="convertResult"></pre>
+
+    <h2>3. Mesclar PDFs</h2>
+    <input type="file" id="pdfFiles" accept=".pdf" multiple>
+    <button onclick="mergePdfs()">Mesclar PDFs</button>
+    <pre id="mergeResult"></pre>
+
+    <h2>4. Adicionar Marca d'Água ao PDF</h2>
+    <input type="file" id="watermarkPdfFile" accept=".pdf">
+    <input type="file" id="watermarkLogoFile" accept=".png, .jpg, .jpeg">
+    <button onclick="addWatermark()">Adicionar Marca d'Água ao PDF</button>
+    <pre id="watermarkResult"></pre>
+
+    <script>
+        // Compress Files
+        const compressFiles = async () => {
+            const files = document.getElementById('compressFiles').files;
+            const zip = new JSZip();
+
+            for (const file of files) {
+                zip.file(file.name, file);
+            }
+
+            const content = await zip.generateAsync({ type: "blob" });
+            const url = URL.createObjectURL(content);
+            downloadFile(url, 'compactado.zip');
+        };
+
+        // Converter DOCX para PDF
+        const convertDocxToPdf = async () => {
+            const fileInput = document.getElementById('docxFile');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert("Por favor, selecione um arquivo DOCX.");
+                return;
+            }
+
+            const arrayBuffer = await file.arrayBuffer();
+            const { value } = await mammoth.convertToHtml({ arrayBuffer });
+            const pdfDoc = await PDFLib.PDFDocument.create();
+            const page = pdfDoc.addPage([600, 400]);
+            page.drawText(value, { x: 50, y: 350 });
+
+            const pdfBytes = await pdfDoc.save();
+            const url = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
+            downloadFile(url, 'convertido.pdf');
+        };
+
+        // Merge PDFs
+        const mergePdfs = async () => {
+            const files = document.getElementById('pdfFiles').files;
+            const pdfDoc = await PDFLib.PDFDocument.create();
+
+            for (const file of files) {
+                const existingPdfBytes = await file.arrayBuffer();
+                const existingPdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+                const copiedPages = await pdfDoc.copyPages(existingPdfDoc, existingPdfDoc.getPageIndices());
+                copiedPages.forEach((page) => pdfDoc.addPage(page));
+            }
+
+            const pdfBytes = await pdfDoc.save();
+            const url = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
+            downloadFile(url, 'merged.pdf');
+        };
+
+        // Add Watermark to PDF
+        const addWatermark = async () => {
+            const pdfFileInput = document.getElementById('watermarkPdfFile');
+            const logoFileInput = document.getElementById('watermarkLogoFile');
+            const pdfFile = pdfFileInput.files[0];
+            const logoFile = logoFileInput.files[0];
+
+            if (!pdfFile || !logoFile) {
+                alert("Por favor, selecione tanto um arquivo PDF quanto uma imagem de logo.");
+                return;
+            }
+
+            const pdfBytes = await pdfFile.arrayBuffer();
+            const logoBytes = await logoFile.arrayBuffer();
+            const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+            const logoImage = await pdfDoc.embedPng(logoBytes);
+            const logoDims = logoImage.scale(0.5); // Scale the logo
+
+            const pages = pdfDoc.getPages();
+            pages.forEach((page) => {
+                page.drawImage(logoImage, {
+                    x: page.getWidth() - logoDims.width - 25,
+                    y: 25,
+                    width: logoDims.width,
+                    height: logoDims.height,
+                });
+            });
+
+            const pdfBytesWithWatermark = await pdfDoc.save();
+            const url = URL.createObjectURL(new Blob([pdfBytesWithWatermark], { type: 'application/pdf' }));
+            downloadFile(url, 'watermarked.pdf');
+        };
+
+        // Function to trigger download
+        const downloadFile = (url, filename) => {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url); // Clean up the URL object
+        };
+    </script>
+</body>
+</html>
