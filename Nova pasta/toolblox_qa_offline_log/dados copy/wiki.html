@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki QA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav>
+    <h2>Wiki QA</h2>
+    <ul>
+      <li><a href="#fundamentos">Fundamentos de QA</a></li>
+      <li><a href="#tipos">Tipos de Testes</a></li>
+      <li><a href="#processos">Processos e Práticas</a></li>
+      <li><a href="#nao-funcionais">Testes Não Funcionais</a></li>
+      <li><a href="#ferramentas">Ferramentas</a></li>
+      <li><a href="#boas-praticas">Boas Práticas</a></li>
+      <li><a href="#glossario">Glossário</a></li>
+    </ul>
+  </nav>
+
+  <!-- Conteúdo -->
+  <main>
+    <h1>📖 Wiki QA – Quality Assurance</h1>
+
+    <section id="fundamentos" class="card">
+      <h2>📌 Fundamentos de QA</h2>
+      <p><b>O que é QA:</b> Garantia de qualidade no desenvolvimento de software, focando em prevenção de falhas e melhoria contínua.</p>
+      <p><b>QA x Tester:</b></p>
+      <ul>
+        <li><b>QA</b> → processos e métricas.</li>
+        <li><b>Tester</b> → execução de testes.</li>
+      </ul>
+    </section>
+
+    <section id="tipos" class="card">
+      <h2>📌 Tipos de Testes</h2>
+      <ul>
+        <li><b>Manual:</b> executado pelo analista.</li>
+        <li><b>Automatizado:</b> scripts para validar.</li>
+        <li><b>Funcional:</b> baseado em requisitos.</li>
+        <li><b>Não Funcional:</b> desempenho, segurança, usabilidade.</li>
+        <li><b>Exploratório:</b> sem roteiro fixo.</li>
+        <li><b>Regressão:</b> garante que nada quebrou.</li>
+        <li><b>Smoke:</b> checagem rápida do sistema.</li>
+      </ul>
+    </section>
+
+    <section id="processos" class="card">
+      <h2>📌 Processos e Práticas</h2>
+      <p><b>Ciclo de Vida do Bug:</b> Novo → Em análise → Aberto → Em progresso → Resolvido → Reaberto → Fechado</p>
+      <p><b>Casos de Teste:</b></p>
+      <ul>
+        <li>Identificador: CT-001</li>
+        <li>Pré-condições</li>
+        <li>Passos</li>
+        <li>Resultado esperado</li>
+      </ul>
+      <p><b>BDD (Gherkin):</b></p>
+      <pre>
+Dado que o usuário está na tela de login
+Quando inserir usuário e senha válidos
+Então deve acessar o sistema
+      </pre>
+    </section>
+
+    <section id="nao-funcionais" class="card">
+      <h2>📌 Testes Não Funcionais</h2>
+      <ul>
+        <li><b>Performance:</b> tempo de resposta.</li>
+        <li><b>Carga:</b> múltiplos usuários.</li>
+        <li><b>Segurança:</b> vulnerabilidades (SQLi, XSS).</li>
+        <li><b>Usabilidade:</b> experiência do usuário.</li>
+      </ul>
+    </section>
+
+    <section id="ferramentas" class="card">
+      <h2>📌 Ferramentas Comuns</h2>
+      <ul>
+        <li><b>Automação:</b> Selenium, Cypress, Playwright</li>
+        <li><b>APIs:</b> Postman, RestAssured</li>
+        <li><b>Performance:</b> JMeter, Gatling</li>
+        <li><b>Gestão:</b> Jira, TestRail</li>
+        <li><b>CI/CD:</b> Jenkins, GitHub Actions</li>
+      </ul>
+    </section>
+
+    <section id="boas-praticas" class="card">
+      <h2>📌 Boas Práticas</h2>
+      <ul>
+        <li>Versionar scripts (Git).</li>
+        <li>Reportar bugs com clareza (passos + evidências).</li>
+        <li>Shift Left Testing (testar cedo).</li>
+        <li>Métricas de qualidade (cobertura, falhas críticas).</li>
+      </ul>
+    </section>
+
+    <section id="glossario" class="card">
+      <h2>📌 Glossário Rápido</h2>
+      <ul>
+        <li><b>Smoke Test:</b> teste rápido de estabilidade.</li>
+        <li><b>Regression Test:</b> garante que nada quebrou.</li>
+        <li><b>Exploratory Test:</b> investigação livre.</li>
+        <li><b>CI/CD:</b> Integração e Entrega Contínua.</li>
+        <li><b>Defeito/Bug:</b> comportamento inesperado.</li>
+        <li><b>Hotfix:</b> correção rápida em produção.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
