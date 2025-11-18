@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki QA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav>
+    <h2>Wiki QA</h2>
+    <ul>
+      <li><a href="#fundamentos">Fundamentos de QA</a></li>
+      <li><a href="#tipos">Tipos de Testes</a></li>
+      <li><a href="#processos">Processos e Práticas</a></li>
+      <li><a href="#nao-funcionais">Testes Não Funcionais</a></li>
+      <li><a href="#ferramentas">Ferramentas</a></li>
+      <li><a href="#boas-praticas">Boas Práticas</a></li>
+      <li><a href="#glossario">Glossário</a></li>
+    </ul>
+  </nav>
+
+  <!-- Conteúdo -->
+  <main>
+    <h1>📖 Wiki QA – Quality Assurance</h1>
+
+    <section id="fundamentos" class="card">
+      <h2> Fundamentos de QA</h2>
+      <p><b>O que é QA:</b> Garantia de qualidade no desenvolvimento de software, focando em prevenção de falhas e melhoria contínua.</p>
+      <p><b>QA x Tester:</b></p>
+      <ul>
+        <li><b>QA</b> → processos e métricas.</li>
+        <li><b>Tester</b> → execução de testes.</li>
+      </ul>
+    </section>
+
+    <section id="tipos" class="card">
+      <h2> Tipos de Testes</h2>
+      <ul>
+        <li><b>Manual:</b> executado pelo analista.</li>
+        <li><b>Automatizado:</b> scripts para validar.</li>
+        <li><b>Funcional:</b> baseado em requisitos.</li>
+        <li><b>Não Funcional:</b> desempenho, segurança, usabilidade.</li>
+        <li><b>Exploratório:</b> sem roteiro fixo.</li>
+        <li><b>Regressão:</b> garante que nada quebrou.</li>
+        <li><b>Smoke:</b> checagem rápida do sistema.</li>
+      </ul>
+    </section>
+
+    <section id="processos" class="card">
+      <h2> Processos e Práticas</h2>
+      <p><b>Ciclo de Vida do Bug:</b> Novo → Em análise → Aberto → Em progresso → Resolvido → Reaberto → Fechado</p>
+      <p><b>Casos de Teste:</b></p>
+      <ul>
+        <li>Identificador: CT-001</li>
+        <li>Pré-condições</li>
+        <li>Passos</li>
+        <li>Resultado esperado</li>
+      </ul>
+      <p><b>BDD (Gherkin):</b></p>
+      <pre>
+Dado que o usuário está na tela de login
+Quando inserir usuário e senha válidos
+Então deve acessar o sistema
+      </pre>
+    </section>
+
+    <section id="nao-funcionais" class="card">
+      <h2> Testes Não Funcionais</h2>
+      <ul>
+        <li><b>Performance:</b> tempo de resposta.</li>
+        <li><b>Carga:</b> múltiplos usuários.</li>
+        <li><b>Segurança:</b> vulnerabilidades (SQLi, XSS).</li>
+        <li><b>Usabilidade:</b> experiência do usuário.</li>
+      </ul>
+    </section>
+
+    <section id="ferramentas" class="card">
+      <h2> Ferramentas Comuns</h2>
+      <ul>
+        <li><b>Automação:</b> Selenium, Cypress, Playwright</li>
+        <li><b>APIs:</b> Postman, RestAssured</li>
+        <li><b>Performance:</b> JMeter, Gatling</li>
+        <li><b>Gestão:</b> Jira, TestRail</li>
+        <li><b>CI/CD:</b> Jenkins, GitHub Actions</li>
+      </ul>
+    </section>
+
+    <section id="boas-praticas" class="card">
+      <h2> Boas Práticas</h2>
+      <ul>
+        <li>Versionar scripts (Git).</li>
+        <li>Reportar bugs com clareza (passos + evidências).</li>
+        <li>Shift Left Testing (testar cedo).</li>
+        <li>Métricas de qualidade (cobertura, falhas críticas).</li>
+      </ul>
+    </section>
+
+    <section id="glossario" class="card">
+      <h2> Glossário Rápido</h2>
+      <ul>
+        <li><b>Smoke Test:</b> teste rápido de estabilidade.</li>
+        <li><b>Regression Test:</b> garante que nada quebrou.</li>
+        <li><b>Exploratory Test:</b> investigação livre.</li>
+        <li><b>CI/CD:</b> Integração e Entrega Contínua.</li>
+        <li><b>Defeito/Bug:</b> comportamento inesperado.</li>
+        <li><b>Hotfix:</b> correção rápida em produção.</li>
+      </ul>
+
+      <section id="glossario" class="card">
+        <h2>Glossário Rápido 2</h2>
+        <ul>
+          <li><b>Presença de Defeitos:</b> testar mostra falhas, não garante ausência delas.</li>
+          <li><b>Testes Exaustivos:</b> impossível testar tudo, priorize por risco.</li>
+          <li><b>Testes Antecipados:</b> detectar cedo economiza tempo e custo.</li>
+          <li><b>Defeitos se Agrupam:</b> maioria ocorre em poucos módulos.</li>
+          <li><b>Testes se Degradam:</b> repetição reduz eficácia — atualize-os.</li>
+          <li><b>Contexto:</b> cada projeto exige abordagem diferente.</li>
+          <li><b>Ausência de Defeitos ≠ Sucesso:</b> sistema pode não atender o negócio.</li>
+      
+          <li><b>Testes Funcionais:</b> verificam o que o sistema faz (Unidade, Integração, Sistema, Aceite, Regressão, Smoke).</li>
+          <li><b>Testes Não Funcionais:</b> verificam o quão bem (Performance, Carga, Stress, Usabilidade, Segurança, Compatibilidade).</li>
+      
+          <li><b>Objetivos:</b> detectar falhas, reduzir riscos, validar requisitos e gerar confiança.</li>
+      
+          <li><b>Níveis de Teste:</b> 
+            Componente (dev), Integração (módulos), Sistema (comportamento geral), Aceite (validação de negócio).
+          </li>
+      
+          <li><b>Processo de Teste:</b> Planejar → Monitorar → Analisar → Modelar → Implementar → Executar → Concluir.</li>
+      
+          <li><b>Caixa-Preta:</b> baseada em requisitos (Partições, Valores-Limite, Tabela de Decisão, Estados).</li>
+          <li><b>Caixa-Branca:</b> baseada no código (Cobertura de instruções e decisões).</li>
+          <li><b>Baseada em Experiência:</b> Exploratório, Intuitivo, Defeitos Conhecidos.</li>
+      
+          <li><b>BDD:</b> define comportamento antes do código (Dado–Quando–Então).</li>
+          <li><b>TDD:</b> teste vem antes do código – Red, Green, Refactor.</li>
+          <li><b>ATDD:</b> testes de aceitação definidos com cliente antes do desenvolvimento.</li>
+      
+          <li><b>Testador:</b> pensa criticamente, revisa planos, prepara dados e configura ambiente.</li>
+      
+          <li><b>Análise de Teste:</b> o que testar.</li>
+          <li><b>Modelagem de Teste:</b> como testar.</li>
+      
+          <li><b>Teste Estático:</b> sem executar código (revisões e análise estática); detecta falhas cedo.</li>
+          <li><b>Teste Dinâmico:</b> executa o sistema para encontrar falhas.</li>
+      
+          <li><b>Erro:</b> engano humano.</li>
+          <li><b>Defeito:</b> erro no código.</li>
+          <li><b>Falha:</b> execução de um defeito.</li>
+      
+          <li><b>Valor Limite:</b> testa extremos (abaixo e acima dos limites).</li>
+          <li><b>Partição de Equivalência:</b> divide entradas válidas e inválidas.</li>
+          <li><b>Estimativa 3 Pontos:</b> (Otimista + 4×Provável + Pessimista) ÷ 6.</li>
+      
+          <li><b>Produtos de Teste:</b> 
+            Caso (resultados esperados), Roteiro (instruções), Carta (exploratórios), Conjunto (scripts executados).
+          </li>
+      
+          <li><b>Quadrantes Ágeis:</b> 
+            Usabilidade e Funcional (negócio), Componentes e Confiabilidade (tecnologia).
+          </li>
+      
+          <li><b>Falhas Comuns:</b> 
+            Componente (lógica), Integração (comunicação), Sistema (regras), Aceite (necessidades do usuário).
+          </li>
+        </ul>
+      </section>
+      
+
+
+    </section>
+  </main>
+</body>
+</html>
