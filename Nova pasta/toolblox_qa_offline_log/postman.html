@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman: O Guia Completo para Testes de API</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f7f9;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #343a40;
+            margin-top: 25px;
+            border-left: 5px solid #007bff;
+            padding-left: 10px;
+        }
+        h3 {
+             color: #007bff;
+             margin-top: 15px;
+        }
+        .card {
+            background-color: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .example, .tip {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .example {
+            background-color: #d1ecf1;
+            border-left: 5px solid #007bff;
+        }
+        .tip {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .quote {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+        .code-block {
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 Postman: O Guia Completo para Testes de API</h1>
+
+    <div class="card">
+        <h2>O que é o Postman?</h2>
+        <p>O Postman é uma ferramenta usada para testar APIs (interfaces de programação de aplicações).</p>
+        <p>Em termos simples: ele permite que você envie requisições para um servidor e veja as respostas — tudo isso sem precisar escrever código do zero.</p>
+        
+        <div class="tip">
+            <strong>Analogia:</strong><br>
+            É como um “WhatsApp de QAs e Devs”: você manda uma mensagem (requisição) para o servidor, e ele responde com uma mensagem (resposta).
+        </div>
+        
+        <h3>Por que usar?</h3>
+        <ul>
+            <li>Permite validar se uma API está funcionando corretamente.</li>
+            <li>É intuitivo e visual (ótimo pra quem está começando).</li>
+            <li>Facilita testes funcionais, exploratórios e automatizados.</li>
+            <li>Gera collections organizadas de testes, com histórico e documentação.</li>
+            <li>Permite colaboração entre QAs e Devs.</li>
+        </ul>
+    </div>
+    
+    <div class="card">
+        <h2>Entendendo o que é uma API</h2>
+        <p>Antes de tudo, entenda o que você está testando.</p>
+        <p>Uma API (Application Programming Interface) é como um cardápio: ela lista o que o sistema oferece (endereços, ações, parâmetros) para que outras aplicações possam se comunicar.</p>
+        
+        <div class="example">
+            <strong>Exemplo simples:</strong><br>
+            O aplicativo do iFood se comunica com as APIs dos restaurantes.<br>
+            O Postman é o “garçom” que faz esse pedido de forma manual para testar se o sistema responde certo.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Principais Tipos de Requisição (Métodos HTTP)</h2>
+        <p>No Postman, você verá diferentes métodos HTTP — eles indicam o tipo de ação que você quer fazer com a API. Pense neles como verbos de ação:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Método</th>
+                    <th>Significado</th>
+                    <th>Exemplo</th>
+                    <th>Analogia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GET</td>
+                    <td>Buscar dados</td>
+                    <td>Buscar lista de usuários</td>
+                    <td>“Quero ver o cardápio.”</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>Enviar/criar dados</td>
+                    <td>Criar um novo usuário</td>
+                    <td>“Quero adicionar um novo prato.”</td>
+                </tr>
+                <tr>
+                    <td>PUT</td>
+                    <td>Atualizar dados existentes (total)</td>
+                    <td>Atualizar nome do usuário</td>
+                    <td>“Quero mudar o nome do prato.”</td>
+                </tr>
+                <tr>
+                    <td>PATCH</td>
+                    <td>Atualizar parcialmente</td>
+                    <td>Alterar só o e-mail</td>
+                    <td>“Trocar só um ingrediente.”</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td>Excluir dados</td>
+                    <td>Apagar usuário</td>
+                    <td>“Remover um prato do cardápio.”</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Explorando o Postman pela primeira vez</h2>
+        <ol>
+            <li>Crie uma conta gratuita em <a href="https://www.postman.com/signup" target="_blank">Postman: Sign Up for Free</a>.</li>
+            <li>Clique em Workspaces → Create Workspace.</li>
+            <li>Dentro do workspace, crie uma Collection — pense nela como uma “pasta” para agrupar suas requisições.</li>
+            <li>Dentro da collection, clique em New Request.</li>
+        </ol>
+        
+        <h3>Fazendo seu primeiro teste (GET)</h3>
+        <p><strong>Cenário:</strong> Buscar usuários na API pública ServeRest</p>
+        <p><strong>URL:</strong> <code>https://serverest.dev/usuarios</code></p>
+        <ol>
+            <li>No Postman, escolha o método GET.</li>
+            <li>Cole a URL acima.</li>
+            <li>Clique em Send.</li>
+        </ol>
+        <p><strong>Resultado esperado:</strong> Abaixo aparecerá um JSON com lista de usuários.</p>
+    </div>
+
+    <div class="card">
+        <h2>Enviando dados (POST)</h2>
+        <p><strong>Cenário:</strong> Criar um novo usuário</p>
+        <p><strong>URL:</strong> <code>https://serverest.dev/usuarios</code> | <strong>Método:</strong> POST</p>
+        <ol>
+            <li>Selecione POST.</li>
+            <li>Vá até a aba Body → Raw → JSON.</li>
+            <li>Cole o corpo da requisição:</li>
+        </ol>
+        <div class="code-block">
+            {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"nome": "Karen QA",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"email": "karenqa@test.com",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"password": "1234",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"administrador": "true"<br>
+            }<br>
+        </div>
+        <ol start="4">
+            <li>Clique em Send.</li>
+        </ol>
+        
+        <div class="tip">
+            <strong>Explicando:</strong> O Status 201 Created indica sucesso! Você acabou de inserir um novo dado no banco via API.
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>Entendendo o Código de Status (Status Code)</h2>
+        <p>Quando você clica em Send, a resposta vem com um número — esse é o status da requisição. É como o humor da API naquele momento:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Significado</th>
+                    <th>Interpretação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>OK</td>
+                    <td>Tudo certo</td>
+                </tr>
+                <tr>
+                    <td>201</td>
+                    <td>Created</td>
+                    <td>Novo recurso criado</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>Bad Request</td>
+                    <td>Erro no envio dos dados</td>
+                </tr>
+                <tr>
+                    <td>401</td>
+                    <td>Unauthorized</td>
+                    <td>Falta autenticação</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>Not Found</td>
+                    <td>Endpoint não existe</td>
+                </tr>
+                <tr>
+                    <td>500</td>
+                    <td>Internal Server Error</td>
+                    <td>Erro no servidor</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="card">
+        <h2>Collections e Environments</h2>
+        <p>Para deixar tudo organizado e dinâmico:</p>
+        <ul>
+            <li>Collections: guardam suas requisições agrupadas.</li>
+            <li>Environments: armazenam variáveis, como URLs e tokens.</li>
+        </ul>
+        
+        <h3>Criando Variáveis de Ambiente</h3>
+        <p>As variáveis servem para armazenar dados reutilizáveis (URLs, tokens, IDs). Vá em Environments → Create Environment.</p>
+        <div class="example">
+            <strong>Exemplo:</strong><br>
+            Crie variáveis, por exemplo:<br>
+            <code>base_url</code> = <code>https://serverest.dev</code><br>
+            <code>token</code> = <code>seu_token_aqui</code><br>
+            <br>
+            Agora, use: <code>{{base_url}}/usuarios</code>
+        </div>
+        
+        <h3>Vantagens:</h3>
+        <ul>
+            <li>Facilita mudar ambientes (teste → produção) alterando apenas uma variável.</li>
+            <li>Evita erros e repetições.</li>
+            <li>Mantém o workspace limpo e dinâmico.</li>
+        </ul>
+    </div>
+    
+    <div class="card">
+        <h2>Automatizando Testes no Postman</h2>
+        <p>Você pode escrever scripts de teste simples em JavaScript na aba Tests para validar as respostas automaticamente. Eles são essenciais para a automação de APIs.</p>
+        
+        <div class="code-block">
+            pm.test("Status code is 200", function () {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;pm.response.to.have.status(200);<br>
+            });<br>
+            <br>
+            pm.test("O campo 'email' existe", function () {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;var jsonData = pm.response.json();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;pm.expect(jsonData.email).to.exist;<br>
+            });<br>
+        </div>
+        <p>Esses scripts validam automaticamente se as respostas estão corretas!</p>
+    </div>
+
+    <div class="quote">
+        “Dominar o Postman é entender o diálogo entre sistemas. Quanto mais você explora, mais você entende a alma do produto. E um QA que entende o produto, testa com propósito.”
+    </div>
+</div>
+
+</body>
+</html>
